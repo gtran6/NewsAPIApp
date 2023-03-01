@@ -1,13 +1,14 @@
 package com.example.newsapiapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.newsapiapp.databinding.SliderItemBinding
-import com.example.newsapiapp.model.Article
+import com.example.newsapiapp.model.ArticleX
 import com.smarteist.autoimageslider.SliderViewAdapter
 
-class SliderAdapter(val list: List<Article>) : SliderViewAdapter<SliderAdapter.SliderViewHolder>() {
+class SliderAdapter(val list: List<ArticleX>) : SliderViewAdapter<SliderAdapter.SliderViewHolder>() {
 
     class SliderViewHolder(var binding: SliderItemBinding) : SliderViewAdapter.ViewHolder(binding.root)
 
@@ -24,6 +25,7 @@ class SliderAdapter(val list: List<Article>) : SliderViewAdapter<SliderAdapter.S
             Glide.with(viewHolder.itemView)
                 .load(list[position].urlToImage).fitCenter()
                 .into(viewHolder.binding.imageSlider)
+            //Log.d("image","${list[position].urlToImage.toString()}")
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.newsapiapp.di
 
+import com.example.newsapiapp.extra.Utils.BASE_URL
 import com.example.newsapiapp.repository.MainRepository
 import com.example.newsapiapp.service.ApiInterface
 import dagger.Module
@@ -23,7 +24,7 @@ object AppModule {
     @Provides
     fun provideRetrofitInstance() : ApiInterface {
         return Retrofit.Builder()
-            .baseUrl("https://newsapi.org/v2/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiInterface::class.java)
