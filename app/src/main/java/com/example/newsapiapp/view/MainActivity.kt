@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        mainViewModel.getDataTopHeadlines("techcrunch", API_KEY)
+        mainViewModel.getDataTopHeadlines("flower", API_KEY)
 
         mainViewModel.headlinesResponse.observe(this, Observer {
             when (it) {
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setAdapter(list: List<ArticleX>) = binding.imageSlider.apply {
         setSliderAdapter(SliderAdapter(list))
-        setIndicatorAnimation(IndicatorAnimationType.WORM)
+        setIndicatorAnimation(IndicatorAnimationType.SWAP)
         setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
         startAutoCycle()
         scrollTimeInSec = 3

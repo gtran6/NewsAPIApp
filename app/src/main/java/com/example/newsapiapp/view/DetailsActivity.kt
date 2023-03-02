@@ -1,5 +1,7 @@
 package com.example.newsapiapp.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -24,6 +26,13 @@ class DetailsActivity : AppCompatActivity() {
                 Glide.with(this@DetailsActivity)
                     .load(article.urlToImage)
                     .into(binding.image)
+
+                // set up implicit intent
+                moreButton.setOnClickListener {
+                    val query: Uri = Uri.parse("${article.url}")
+                    val intent = Intent(Intent.ACTION_VIEW, query)
+                    startActivity(intent)
+                }
             }
         }
         binding.backButton.setOnClickListener {
