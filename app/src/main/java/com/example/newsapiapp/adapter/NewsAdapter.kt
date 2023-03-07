@@ -37,6 +37,7 @@ class NewsAdapter(val list: List<Article>) : RecyclerView.Adapter<NewsAdapter.Ne
                 intent.putExtra("article", list[position])
                 holder.itemView.context.startActivity(intent)
             }
+
         }
     }
 }

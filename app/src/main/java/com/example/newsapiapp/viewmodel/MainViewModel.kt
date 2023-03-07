@@ -1,5 +1,6 @@
 package com.example.newsapiapp.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +11,6 @@ import com.example.newsapiapp.model.ArticleX
 import com.example.newsapiapp.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,4 +43,24 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         }
     }
 
+    fun insertNews(context: Context, article: Article) {
+        mainRepository.insertNews(context, article)
+    }
+
+    fun getNewsFromDatabase(context: Context) {
+        //mainRepository.getAllNews(context)
+        viewModelScope.launch {
+            data.postValue(Events.Loading())
+            mainRepository.getAllNews(context).catch {
+                Log.e("API", "get: ${it.localizedMessage}")
+                data.postValue(Events.Error(msg = it.localizedMessage))
+            }.collect { list ->
+                data.postValue(Events.Success(list))
+            }
+        }
+    }
+
+    fun deleteNews(context: Context, article: Article) {
+        mainRepository.deleteNews(context, article)
+    }
 }

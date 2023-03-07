@@ -2,16 +2,37 @@ package com.example.newsapiapp.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.Gson
 
+@Entity(tableName = "news_table")
 data class Article(
+
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "author")
     val author: String,
+
+    @ColumnInfo(name = "content")
     val content: String,
+
+    @ColumnInfo(name = "description")
     val description: String,
+
+    @ColumnInfo(name = "publishedAt")
     val publishedAt: String,
+
+    @ColumnInfo(name = "source")
     val source: Source,
+
+    @ColumnInfo(name = "title")
     val title: String,
+
+    @ColumnInfo(name = "url")
     val url: String,
+
+    @ColumnInfo(name = "urlToImage")
     val urlToImage: String
 ) : Parcelable {
 
