@@ -21,10 +21,8 @@ abstract class NewsDatabase : RoomDatabase() {
         fun getDatabaseClient(context: Context): NewsDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    NewsDatabase::class.java, "news_database")
-                    .fallbackToDestructiveMigration()
-                    .build()
+                    context.applicationContext, NewsDatabase::class.java, "news_database"
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

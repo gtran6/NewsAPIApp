@@ -1,7 +1,6 @@
 package com.example.newsapiapp.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import com.example.newsapiapp.data.NewsDao
 import com.example.newsapiapp.data.NewsDatabase
 import com.example.newsapiapp.model.ApiResponse

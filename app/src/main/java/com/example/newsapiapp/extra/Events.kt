@@ -1,6 +1,6 @@
 package com.example.newsapiapp.extra
 
-sealed class Events<T> (val data: T? = null, val msh: String? = "") {
+sealed class Events<T> (var data: T? = null, val msh: String? = "") {
 
     class Success<T>(data: T?) : Events<T>(data)
 

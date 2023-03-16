@@ -23,16 +23,16 @@ class DetailsActivity : AppCompatActivity() {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //get the data
         val article = intent.getParcelableExtra<Article>("article")
+
         if (article != null) {
             binding.apply {
                 title.text = article.title
                 publishedAt.text = article.publishedAt
                 source.text = article.source.name
                 content.text = article.content
-                Glide.with(this@DetailsActivity)
-                    .load(article.urlToImage)
-                    .into(binding.image)
+                Glide.with(this@DetailsActivity).load(article.urlToImage).into(binding.image)
 
                 // set up implicit intent
                 moreButton.setOnClickListener {
@@ -44,7 +44,7 @@ class DetailsActivity : AppCompatActivity() {
                 saveButton.setOnClickListener {
                     mainViewModel.insertNews(this@DetailsActivity, article)
                     Toast.makeText(applicationContext, " News Saved", Toast.LENGTH_SHORT).show()
-                    Log.d("save-news","${article.title.toString()}")
+                    //Log.d("save-news","${article.title.toString()}")
                     Log.d("save-news", "${article.toString()}")
                 }
             }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.newsapiapp.model.Article
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -28,13 +27,14 @@ class MainActivity : AppCompatActivity() {
     val mainViewModel: MainViewModel by viewModels()
     var search: String = ""
     var sortBy: String = ""
-
+    private val newsAdapter by lazy { NewsAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setRecyclerAdapter()
 
-        mainViewModel.getData("world", sortBy, API_KEY)
+        mainViewModel.getData("android", sortBy, API_KEY)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.relevantButton -> sortBy = "relevancy"
                 R.id.recentButton -> sortBy = "publishedAt"
             }
-
             mainViewModel.getData(search, sortBy, API_KEY)
         }
 
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 is Events.Success -> {
                     it.let {
                         it.data?.let { it2 ->
-                            setRecyclerAdapter(it2)
+                            newsAdapter.differ.submitList(it2)
                         }
                     }
                     binding.progressBar.visibility = View.GONE
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is Events.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    Log.e("headline", "loading")
+                    //Log.e("headline", "loading")
                 }
                 is Events.Success -> {
                     it.let {
@@ -97,11 +96,11 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     binding.progressBar.visibility = View.GONE
-                    Log.e("headline", "success")
+                    //Log.e("headline", "success")
                 }
                 is Events.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Log.e("headline", "error")
+                    //Log.e("headline", "error")
                 }
             }
         })
@@ -112,8 +111,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRecyclerAdapter(list: List<Article>) = binding.rcv.apply {
-        adapter = NewsAdapter(list)
+    private fun setRecyclerAdapter() = binding.rcv.apply {
+        adapter = newsAdapter
         layoutManager = LinearLayoutManager(this@MainActivity)
     }
 

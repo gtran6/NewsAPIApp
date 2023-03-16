@@ -10,12 +10,16 @@ import com.example.newsapiapp.databinding.CardviewMainBinding
 import com.example.newsapiapp.model.Article
 import com.example.newsapiapp.view.DetailsActivity
 
-class TopAdapter (val list: List<Article>) : RecyclerView.Adapter<TopAdapter.TopViewHolder>() {
+class TopAdapter(val list: List<Article>) : RecyclerView.Adapter<TopAdapter.TopViewHolder>() {
 
-    class TopViewHolder(var binding : CardviewMainBinding) : RecyclerView.ViewHolder(binding.root)
+    class TopViewHolder(var binding: CardviewMainBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopViewHolder {
-        return TopViewHolder(CardviewMainBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return TopViewHolder(
+            CardviewMainBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -24,9 +28,7 @@ class TopAdapter (val list: List<Article>) : RecyclerView.Adapter<TopAdapter.Top
 
     override fun onBindViewHolder(holder: TopViewHolder, position: Int) {
         holder.binding.apply {
-            Glide.with(holder.itemView)
-                .load(list[position].urlToImage)
-                .into(holder.binding.image)
+            Glide.with(holder.itemView).load(list[position].urlToImage).into(holder.binding.image)
 
             source.text = list[position].source.name
             title.text = list[position].title
