@@ -112,8 +112,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerAdapter() = binding.rcv.apply {
-        adapter = newsAdapter
         layoutManager = LinearLayoutManager(this@MainActivity)
+        adapter = newsAdapter
     }
 
     private fun setAdapter(list: List<ArticleX>) = binding.imageSlider.apply {
