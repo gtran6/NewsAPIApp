@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.example.newsapiapp.model.Article
 import com.example.newsapiapp.model.Source
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
@@ -45,5 +46,25 @@ class NewsDaoTest {
             "url",
             "url to image")
         dao.insertNews(newsItem)
+
+        val allArticles = dao.getNewsFromDatabase()
+        assertThat(allArticles).isEqualTo(newsItem)
+    }
+
+    @Test
+    fun deleteNews() = runBlockingTest {
+        val newsItem = Article("author",
+            "content",
+            "description",
+            "published at",
+            source = Source("id", "name"),
+            "title",
+            "url",
+            "url to image")
+        dao.insertNews(newsItem)
+        dao.deleteNews(newsItem)
+
+        val allArticles = dao.getNewsFromDatabase()
+        assertThat(allArticles).isNotEqualTo(newsItem)
     }
 }
