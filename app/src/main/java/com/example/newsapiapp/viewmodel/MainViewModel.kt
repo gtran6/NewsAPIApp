@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val mainRepository: MainRepository) : ViewModel() {
     val data: MutableLiveData<Events<List<Article>>> = MutableLiveData()
     val headlinesResponse: MutableLiveData<Events<List<ArticleX>>> = MutableLiveData()
 
