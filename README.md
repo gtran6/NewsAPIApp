@@ -56,3 +56,6 @@ Now Go to - `app/src/main/java/dat/extra/Utils.kt`
 And replace
 
 `const val API_KEY = "YOUR_API_KEY"`
+
+### Developed By
+Giang Tran
