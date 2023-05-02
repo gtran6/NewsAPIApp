@@ -58,4 +58,4 @@ And replace
 `const val API_KEY = "YOUR_API_KEY"`
 
 ### Developed By
-Giang Tran
+Giang Tran.
