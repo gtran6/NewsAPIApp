@@ -26,23 +26,23 @@ class MainRepository @Inject constructor(val apiInterface: ApiInterface, val new
 
     // get all news
     fun getAllNews(context: Context) : Flow<List<Article>> {
-        var newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
-        return newsDatabase!!.newsDao().getNewsFromDatabase()
+        val newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
+        return newsDatabase.newsDao().getNewsFromDatabase()
     }
 
     // insert news
     fun insertNews(context: Context, article: Article) {
-        var newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
+        val newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
         CoroutineScope(IO).launch {
-            newsDatabase!!.newsDao().insertNews(article)
+            newsDatabase.newsDao().insertNews(article)
         }
     }
 
     // delete news
     fun deleteNews(context: Context, article: Article) {
-        var newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
+        val newsDatabase: NewsDatabase = NewsDatabase.getDatabaseClient(context)
         CoroutineScope(IO).launch {
-            newsDatabase!!.newsDao().deleteNews(article)
+            newsDatabase.newsDao().deleteNews(article)
         }
     }
 }
