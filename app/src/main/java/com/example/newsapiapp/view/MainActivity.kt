@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is Events.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    //Log.e("headline", "loading")
+                    Log.e("headline", "loading")
                 }
                 is Events.Success -> {
                     it.let {
@@ -96,11 +96,11 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     binding.progressBar.visibility = View.GONE
-                    //Log.e("headline", "success")
+                    Log.e("headline", "success")
                 }
                 is Events.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    //Log.e("headline", "error")
+                    Log.e("headline", "error")
                 }
             }
         })
