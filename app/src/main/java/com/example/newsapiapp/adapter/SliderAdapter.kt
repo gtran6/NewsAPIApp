@@ -30,7 +30,7 @@ class SliderAdapter(val list: List<ArticleX>) :
         viewHolder.binding.apply {
             Glide.with(viewHolder.itemView).load(list[position].urlToImage).fitCenter()
                 .into(viewHolder.binding.imageSlider)
-            //Log.d("image","${list[position].urlToImage.toString()}")
+            Log.d("image","${list[position].urlToImage.toString()}")
         }
     }
 }
